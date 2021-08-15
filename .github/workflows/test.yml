@@ -1,0 +1,17 @@
+name: test
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -L "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.sha }}/test.txt"
+        name: github.sha
+      - run: curl -L "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.event.pull_request.head.sha }}/test.txt"
+        name: github.event.pull_request.head.sha
+      - run: curl -L "https://raw.githubusercontent.com/${{ github.repository }}/${{ github.event.pull_request.base.sha }}/test.txt"
+        name: github.event.pull_request.base.sha
+        
